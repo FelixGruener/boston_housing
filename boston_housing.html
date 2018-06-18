@@ -12115,8 +12115,16 @@ Standard deviation of prices: $165171.13154429477
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong><br/>
-The correlation can be directly seen from the data and the modell has successfully captured the variation of the target variable. More datapoints could perhaps have helped to improve the model<br/></p>
+<p><strong>Answer:</strong><br/></p>
+<p>Considering that the coefficient of determination(Rˆ2) of the above model is about 92.3% and it's fairly near of 1, so, my final answer is yes! the above model has captured the variation of the variable with success.</p>
+<p>The more variance that is accounted for by the regression model the closer the data points will fall to the fitted regression line. Theoretically, if a model could explain 100% of the variance, the fitted values would always equal the observed values and, therefore, all the data points would fall on the fitted regression line.</p>
+<p>The correlation can be directly seen from the data and the modell has successfully captured the variation of the target variable. More datapoints could perhaps have helped to improve the model<br/>
+The more variance that is accounted for by the regression model the closer the data points will fall to the fitted regression line.</p>
+<p>R-squared = Explained variation / Total variation</p>
+<p>R-squared is always between 0 and 100%:</p>
+<p>0% indicates that the model explains none of the variability of the response data around its mean. <br/>
+100% indicates that the model explains all the variability of the response data around its mean.
+In general, the higher the R-squared, the better the model fits your data.</p>
 
 </div>
 </div>
@@ -12403,7 +12411,36 @@ More training points would not benefit the model further, since a plateau has be
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <p>The grid search technique automates the process of tuning parameters of a model in order to get the best performance.</p>
+<p>For example, on a decision tree, you may want to find the best performance with max-depth (3 or 4) and metric (entropy and gini). Grid search combines these parameter options for you, as in the table below, and allows for faster experiments to help optimize the learning.</p>
+<table>
+<thead><tr>
+<th>Max-Depth</th>
+<th style="text-align:center">Criterion/Metric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td style="text-align:center">entropy</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:center">gini</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center">entropy</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center">gini</td>
+</tr>
+</tbody>
+</table>
+<p>With only 2 features as in the example above, it may not be extremely helpful, but if there are a number of parameters and each with its own wide possible ranges of values, the grid search would be the most efficient way to fine tune them for the best performance.</p>
 <p>Used to search the best combination of parameters from a grid with possible parameter values. It can be used to optimize learning algorithm by returning the best classifier for the combination of provided parameters.</p>
+<p>Therefore, we resort to grid search : pick a bunch of values of α -- (α1,α2,…), pick a bunch of values of β -- (β1,β2,…) and for each pair of values, evaluate the validation error function. Then pick the pair that gives the minimum value of the validation error function.</p>
+<p>The pairs  (α1,β1),(α1,β2),…,(α2,β1),(α2,β2),…  when plotted in space look like a grid, hence the name.</p>
 
 </div>
 </div>
@@ -12429,7 +12466,15 @@ More training points would not benefit the model further, since a plateau has be
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>The k-fold cross-validation training technique is the process of dividing your data points into smaller number of <strong>k</strong> bins. Testing then occurs on one of the k bins while training occurs with the other <strong>k-1</strong> bins. This process, testing and training, occurs k times across all bins for testing and training. The average of the k testing experiments are used as the overall result of the model.</p>
+<p>The k-fold cross-validation training technique is the process of dividing your data points into smaller number of <strong>k</strong> bins. We first split our data into train and test and then apply k-fold on the train dataset. This is how cross-validation works. Now after this step we train our model on (k-1) folds and use 1 fold for cross-validation. This process is repeated k times, each time with a different cross-validation set. The average cross-validation score is used to check the performance of the model. Once you have selected the best parameters using gridSearch along with k-fold cross-validation, we will use the test set to check the final performance of the model.</p>
+<p><strong>K-fold cross validation is performed as per the following steps:</strong></p>
+<p>1.Partition the original training data set into k equal subsets. Each subset is called a fold. Let the folds be named as f1, f2, …, fk . <br/><br/>
+2.For i = 1 to i = k  <br/></p>
+<ul>
+<li>Keep the fold fi as Validation set and keep all the remaining k-1 folds in the Cross validation training set. <br/><br/></li>
+<li>Train your machine learning model using the cross validation training set and calculate the accuracy of your model by validating the predicted results against the validation set.</li>
+</ul>
+<p>3.Estimate the accuracy of your machine learning model by averaging the accuracies derived in all the k cases of cross validation.</p>
 <p>Not using cross-validation could result in the model being tuned only to a specific subset of data. This is because without using a technique such as cross-validation, for example, only using kfold to create testing and training data, will <strong>not shuffle</strong> your data points, i.e if your dataset is ordered or in any pattern.</p>
 <p>Grid search would only perform tuning on the same subset of training data. Utilizing cross-validation, eliminates this issue by using the entire dataset.</p>
 
